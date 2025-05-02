@@ -1,0 +1,120 @@
+basePath: /
+definitions:
+  personservice.Person:
+    properties:
+      age:
+        type: integer
+      country:
+        type: string
+      gender:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      patronymic:
+        type: string
+      surname:
+        type: string
+    required:
+    - name
+    - surname
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  title: Person App API
+  version: "1.0"
+paths:
+  /person:
+    post:
+      consumes:
+      - application/json
+      operationId: create-person
+      parameters:
+      - description: person info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/personservice.Person'
+      produces:
+      - application/json
+      responses: {}
+      summary: CreatePerson
+      tags:
+      - Create
+  /person/{person_id}:
+    delete:
+      consumes:
+      - application/json
+      operationId: delete-person
+      parameters:
+      - description: person_id
+        in: path
+        name: person_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: DeletePerson
+      tags:
+      - Delete
+    patch:
+      consumes:
+      - application/json
+      operationId: update-person
+      parameters:
+      - description: person_id
+        in: path
+        name: person_id
+        required: true
+        type: string
+      - description: person info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/personservice.Person'
+      produces:
+      - application/json
+      responses: {}
+      summary: UpdatePerson
+      tags:
+      - Update
+  /persons:
+    get:
+      consumes:
+      - application/json
+      operationId: get-persons
+      parameters:
+      - default: 1
+        description: Номер страницы
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Количество записей
+        in: query
+        name: size
+        type: integer
+      - description: Возраст
+        in: query
+        name: age
+        type: integer
+      - description: Пол
+        in: query
+        name: gender
+        type: string
+      - description: Национальность
+        in: query
+        name: country
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: GetPersons
+      tags:
+      - Get
+swagger: "2.0"
